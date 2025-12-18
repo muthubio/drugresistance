@@ -5,6 +5,11 @@ python run_pipeline.py --r1 /home/muthukumarb/drugresistance/ERR12307390_1.fastq
 ```                                                                                   
                                                                                                                                                                                 
 **LineageXpress_new**
+```
+conda env create -f envs/biofx.yml
+conda activate biofx
+```
+
 ```                                                                                        
 python lineageexpress_new_version4.py --sample_list samples.txt --ref_genome /home/muthukumarb/lineageXpress/data/h37rv.fa   --snp_file /home/muthukumarb/lineageXpress/data/lineage_snp_updated_au13.tsv   --bed_file /home/muthukumarb/lineageXpress/data/targeted_modified_regions_au13.bed --threads 12 --mutations_csv mutations.csv --snpeff_cmd "snpEff" --snpeff_db Mycobacterium_tuberculosis_h37rv --output_dir ERR12307390
 ```
