@@ -42,11 +42,14 @@ python host_removed_to_lineage_summary.py \
 ```
 
 ```bash
-python host_removed_to_lineage_summary.py \
-  --input_list samples.txt \
-  --kraken_db /path/to/kraken_db \
-  --extract_script /path/to/extract_kraken_reads.py \
-  --threads 4
+ python host_removed_to_lineage_summary.py \
+  --input_list sample_list.txt \
+  --kraken_db /home/muthukumarb/metagenomics_tb/data/kraken_gtdb \
+  --extract_script /home/muthukumarb/krakendb/KrakenTools/extract_kraken_reads.py \
+  --kraken_memory_mapping \
+  --threads 12 \
+  --result_dir /home/muthukumarb/metagenomics_tb/results/mtb_lineage_express_testing/test8 \
+  --summary_csv /home/muthukumarb/metagenomics_tb/results/mtb_lineage_express_testing/test8.csv
 ```
 
 ### Automatic detection from a directory
