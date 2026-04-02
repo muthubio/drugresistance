@@ -41,6 +41,14 @@ python host_removed_to_lineage_summary.py \
   --threads 4
 ```
 
+```bash
+python host_removed_to_lineage_summary.py \
+  --input_list samples.txt \
+  --kraken_db /path/to/kraken_db \
+  --extract_script /path/to/extract_kraken_reads.py \
+  --threads 4
+```
+
 ### Automatic detection from a directory
 
 ```bash
