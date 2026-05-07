@@ -14,11 +14,21 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path("/home/muthukumarb/drugresistance")
+
 DATA_DIR = BASE_DIR / "data"
-DEFAULT_REF = str(DATA_DIR / "h37rv.fa")
-DEFAULT_SNP_FILE = str(DATA_DIR / "lineage_snp_updated_au13.tsv")
-SAMPLE_INPUT_DIR = BASE_DIR / "sample_input"
+
+# Reference
+DEFAULT_REF = str(DATA_DIR / "reference" / "h37rv.fa")
+
+# Database files
+DEFAULT_SNP_FILE = str(DATA_DIR / "database" / "lineage_snp_updated_au13.tsv")
+DEFAULT_BED_FILE = str(DATA_DIR / "database" / "targeted_modified_regions_au13.bed")
+DEFAULT_MUTATION_FILE = str(DATA_DIR / "database" / "mutations.csv")
+DEFAULT_DRUGS_FILE = str(DATA_DIR / "database" / "drugs_list.txt")
+
+# Sample locations
+SAMPLE_INPUT_DIR = DATA_DIR / "samples"
 SAMPLE_DATA_DIR = BASE_DIR / "sample_data"
 
 CONTIG_ALIASES = {"Chromosome", "NC_000962.3", "H37Rv", "chrH37Rv"}
@@ -401,7 +411,13 @@ def main():
     ap.add_argument("--max_depth", type=int, default=100000, help="Maximum read depth for mpileup")
     ap.add_argument("--summary_output_csv", default="metagenomics_lineage_summary.csv",
                     help="Final summary CSV filename")
+    ap.add_argument("--data_dir", default="/home/muthukumarb/drugresistance/data",
+                help="Base data directory containing reference and database folders")
     args = ap.parse_args()
+    DATA_DIR = Path(args.data_dir)
+    # Override defaults using data_dir
+    args.ref_genome = str(DATA_DIR / "reference" / "h37rv.fa") if args.ref_genome == DEFAULT_REF else args.ref_genome
+    args.snp_file = str(DATA_DIR / "database" / "lineage_snp_updated_au13.tsv") if args.snp_file == DEFAULT_SNP_FILE else args.snp_file
 
     for path, label in [(args.ref_genome, "ref_genome"), (args.snp_file, "snp_file")]:
         if path and not os.path.exists(path):
